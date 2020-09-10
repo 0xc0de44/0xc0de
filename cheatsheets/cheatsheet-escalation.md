@@ -27,6 +27,12 @@ tasklist /v /fi "username eq system"
 Get-MpComputerStatus
 ```
 
+## Bypass powershell execution policy
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process
+```
+
 ## Download file
 
 ```powershell
